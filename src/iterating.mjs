@@ -20,7 +20,18 @@ export async function chain(){
     setText(`City: ${JSON.stringify(address.city)}`);
 }
 
-export function concurrent(){
+export async function concurrent(){
+    const orderStatus = axios.get("http://localhost:3000/orderStatuses");
+    const orders = axios.get("http://localhost:3000/orders");
+    // Notice the above is not awaited
+    
+    setText("");
+
+    const {data: statuses} = await orderStatus;
+    const {data: order} = await orders;
+
+    appendText(JSON.stringify(statuses));
+    appendText(JSON.stringify(order));
 }
 
 export function parallel(){
