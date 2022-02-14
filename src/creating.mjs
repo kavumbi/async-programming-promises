@@ -36,7 +36,13 @@ export function xhr() {
     let request = new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
         xhr.open("GET", "http://localhost:3000/users/7");
-        xhr.onload = () => resolve(xhr.responseText);
+        xhr.onload = () => {
+            if(xhr.status === 200){
+                resolve(xhr.responseText);
+            }else{
+                reject(xhr.statusText);
+            }
+        }
         xhr.onerror = () => reject("Request Failed");
         xhr.send();
     });
