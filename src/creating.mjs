@@ -20,6 +20,16 @@ export function interval() {
 }
 
 export function clearIntervalChain() {
+    let counter = 0;
+    let interval;
+    const wait = new Promise((resolve) => {
+        interval = setInterval(() => { 
+            console.log("INTERVAL")
+            resolve(`Timeout! ${++counter}`);
+        }, 1500);
+    })
+    wait.then(text => setText(text))
+        .finally(() => clearInterval(interval));    
 }
 
 export function xhr() {
