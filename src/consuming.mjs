@@ -27,10 +27,10 @@ export function chain(){
 
 export function chainCatch(){
     axios.get("http://localhost:3000/orders/1").then(({data}) => {
-        axios.get(`http://localhost:3000/addresses/${data.shippingAddress}`)
+        return axios.get(`http://localhost:3000/addresses/${data.shippingAddress}`)
      })
      .then(({data}) => {
-        setText(JSON.stringify(data));
+        setText(JSON.stringify(data.my.city));
        })
        .catch(err => setText(err));
 }
